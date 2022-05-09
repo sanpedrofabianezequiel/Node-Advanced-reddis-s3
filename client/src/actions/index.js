@@ -1,8 +1,15 @@
 import axios from 'axios';
 import { FETCH_USER, FETCH_BLOGS, FETCH_BLOG } from './types';
+const baseUrl = 'http://localhost:5000';
+
+const config = { baseURL: baseUrl };
+ const axiosInstance = axios.create(config);
 
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get('/api/current_user');
+  const res = await axiosInstance({
+    method: 'get',
+    url:'/api/current_user',
+  })
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };
